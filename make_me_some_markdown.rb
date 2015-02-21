@@ -18,7 +18,7 @@ def make_me_some_markdown_multi_ball
 	puts "write the name of the markdown files you want creating"
 	a = gets.chomp.downcase
 	array = a.split(' ')
-	p array
+	puts "creating files for: #{array}"
 	
 	array.each do |f|
 		puts `touch #{f}.md`
