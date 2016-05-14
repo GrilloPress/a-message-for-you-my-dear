@@ -10,6 +10,8 @@ page = Nokogiri::HTML(open(JOBS_URL))
 page = page.css('div.vacancy')
 page.each do |v|
   
+  v['class'] = "well #{v['class']}"
+  
   # make links absolute
   v.css('a').each do |x|
     x["href"] = "http://www.nhs.jobs#{x['href']}"
@@ -20,17 +22,53 @@ page.each do |v|
     x.remove
   end
   
+  # Add row to inner summary so that the left and right columns can be bootstrap-ified
   v.css('.vacancy-summary').each do |x|
-    x['class']="row vacancy-summary"
+    x['class']="row #{ x['class']}"
+  end
+  
+  v.css('.left').each do |x|
+    x['class']="left col-md-6"
+  end
+  
+  v.css('.right').each do |x|
+    x['class']="right col-md-6"
+  end
+  
+  # # # # # # # # # # # # # # # # # # # # # #
+  #  Append classes for easy jQuery search  #
+  # # # # # # # # # # # # # # # # # # # # # #
+  
+  # Contract type
+  
+  if v.search("dd:contains('Permanent')")
+    v['class'] = "permanent #{v['class']}"
+  end
+  
+  
+  # Staff groups
+  
+  if v.search("dd:contains('Additional Professional Scientific & Technical')")
+    v['class'] = "additional-professional #{v['class']}"
+  end
+  
+  if v.search("dd:contains('Administrative & Clerical')")
+    v['class'] = "administrative-clerical #{v['class']}"
+  end
+  
+  if v.search("dd:contains('Allied Health Professionals')")
+    v['class'] = "allied-health #{v['class']}"
+  end
+  
+  if v.search("dd:contains('Additional Clinical Services')")
+    v['class'] = "additional-clinical #{v['class']}"
+  end
+  
+  if v.search("dd:contains('Estates & Ancillary')")
+    v['class'] = "estates-ancillary #{v['class']}"
   end
 
-  
-  # x['class']="whatever"
-  
-  # Add row class to vacancy summary block
-  
-  # add bootstrap styles within vacancy summary block - left and right col-md-6
-end
+end 
 
 # create or overwrite a file called out.html with the contents of page
 File.open("out.html", "w") {|f| f.write(page) }
