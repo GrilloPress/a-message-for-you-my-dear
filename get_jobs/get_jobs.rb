@@ -8,6 +8,7 @@ page = Nokogiri::HTML(open(JOBS_URL))
 
 # Grab all of the job vacancies then transform inside the block
 page = page.css('div.vacancy')
+
 page.each do |v|
   
   v['class'] = "well #{v['class']}"
@@ -35,37 +36,65 @@ page.each do |v|
     x['class']="right col-md-6"
   end
   
+  
   # # # # # # # # # # # # # # # # # # # # # #
   #  Append classes for easy jQuery search  #
   # # # # # # # # # # # # # # # # # # # # # #
   
   # Contract type
-  
-  if v.search("dd:contains('Permanent')")
+
+  if v.at_css("dd:contains('Permanent')")
     v['class'] = "permanent #{v['class']}"
   end
   
+  if v.at_css("dd:contains('Students')")
+    v['class'] = "students #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Fixed term')")
+    v['class'] = "fixed-term #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Voluntary')")
+    v['class'] = "voluntary #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Apprenticeship')")
+    v['class'] = "apprenticeship #{v['class']}"
+  end
   
   # Staff groups
   
-  if v.search("dd:contains('Additional Professional Scientific & Technical')")
+  if v.at_css("dd:contains('Additional Professional Scientific & Technical')")
     v['class'] = "additional-professional #{v['class']}"
   end
   
-  if v.search("dd:contains('Administrative & Clerical')")
+  if v.at_css("dd:contains('Administrative & Clerical')")
     v['class'] = "administrative-clerical #{v['class']}"
   end
   
-  if v.search("dd:contains('Allied Health Professionals')")
+  if v.at_css("dd:contains('Allied Health Professionals')")
     v['class'] = "allied-health #{v['class']}"
   end
   
-  if v.search("dd:contains('Additional Clinical Services')")
+  if v.at_css("dd:contains('Additional Clinical Services')")
     v['class'] = "additional-clinical #{v['class']}"
   end
   
-  if v.search("dd:contains('Estates & Ancillary')")
+  if v.at_css("dd:contains('Estates & Ancillary')")
     v['class'] = "estates-ancillary #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Healthcare Scientists')")
+    v['class'] = "healthcare-scientists #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Medical & Dental')")
+    v['class'] = "medical-dental #{v['class']}"
+  end
+  
+  if v.at_css("dd:contains('Nursing & Midwifery')")
+    v['class'] = "nursing-midwifery #{v['class']}"
   end
 
 end 
