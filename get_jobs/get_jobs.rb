@@ -16,4 +16,4 @@ page.each do |v|
   
 end
 
-puts page
+File.open("out.html", "a+") {|f| f.write(page) }
