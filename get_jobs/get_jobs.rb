@@ -20,7 +20,12 @@ page.each do |v|
     x.remove
   end
   
-  #remove job basket
+  v.css('.vacancy-summary').each do |x|
+    x['class']="row vacancy-summary"
+  end
+
+  
+  # x['class']="whatever"
   
   # Add row class to vacancy summary block
   
