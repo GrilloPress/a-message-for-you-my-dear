@@ -23,17 +23,22 @@ page.each do |v|
     x.remove
   end
   
+  # Remove additional reference to STH
+  v.css('p.agency').each do |x|
+    x.remove
+  end
+  
   # Add row to inner summary so that the left and right columns can be bootstrap-ified
   v.css('.vacancy-summary').each do |x|
     x['class']="row #{ x['class']}"
   end
   
   v.css('.left').each do |x|
-    x['class']="left col-md-6"
+    x['class']="col-md-6 #{ x['class'] }"
   end
   
   v.css('.right').each do |x|
-    x['class']="right col-md-6"
+    x['class']="col-md-6 #{ x['class'] }"
   end
   
   
