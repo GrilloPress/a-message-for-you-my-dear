@@ -16,6 +16,7 @@ page.each do |v|
   # make links absolute
   v.css('a').each do |x|
     x["href"] = "http://www.nhs.jobs#{x['href']}"
+    x["target"] = "_blank"
   end
   
   # Remove job basket
