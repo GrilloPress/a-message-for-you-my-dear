@@ -15,7 +15,7 @@ page.each do |v|
   
   # make links absolute
   v.css('a').each do |x|
-    x["href"] = "http://www.nhs.jobs#{x['href']}"
+    x["href"] = "http://www.jobs.nhs.uk#{x['href']}"
     x["target"] = "_blank"
   end
   
@@ -49,6 +49,8 @@ page.each do |v|
   
   # Contract type
 
+
+  
   if v.at_css("dd:contains('Permanent')")
     v['class'] = "permanent #{v['class']}"
   end
